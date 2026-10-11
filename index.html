@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Loubet Forum</title>
+<style>
+:root{--bg:#eef2ff;--paper:#fff;--ink:#222;--mute:#666;--line:#9aa7d6;--head:#1f3a8a;--head2:#2f55c9;--accent:#c33;--link:#1f3a8a;--post:#f6f7ff;--green:#789922;--btn:#e4e9fb;--shadow:#b9c3ec}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10142a;--paper:#1a2040;--ink:#e6e9fb;--mute:#97a0c9;--line:#38437a;--head:#0c1a55;--head2:#2f55c9;--accent:#ff6b6b;--link:#8fb0ff;--post:#222a54;--green:#a5c24a;--btn:#2a3365;--shadow:#080b1c}}
+:root[data-theme="dark"]{--bg:#10142a;--paper:#1a2040;--ink:#e6e9fb;--mute:#97a0c9;--line:#38437a;--head:#0c1a55;--head2:#2f55c9;--accent:#ff6b6b;--link:#8fb0ff;--post:#222a54;--green:#a5c24a;--btn:#2a3365;--shadow:#080b1c}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Verdana,Tahoma,Arial,sans-serif}
+a{color:var(--link);text-decoration:none;cursor:pointer}a:hover{text-decoration:underline;color:var(--accent)}
+#wrap{max-width:900px;margin:0 auto;padding:8px}
+header{background:linear-gradient(var(--head2),var(--head));border:2px outset var(--line);padding:10px 14px;color:#fff;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;box-shadow:3px 3px 0 var(--shadow)}
+.logo{font:bold 26px/1 "Trebuchet MS",Verdana,sans-serif;letter-spacing:1px;text-shadow:2px 2px 0 #000;cursor:pointer}
+.logo small{display:block;font:11px Verdana;letter-spacing:0;text-shadow:none;opacity:.85;margin-top:3px}
+.online{background:#000;color:#4f4;font:12px "Courier New",monospace;padding:4px 8px;border:1px inset #555}
+.online i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#4f4;margin-right:5px;animation:b 1.2s steps(2) infinite}
+@keyframes b{50%{opacity:.2}}
+nav{background:var(--btn);border:1px solid var(--line);margin:6px 0;padding:4px 8px;font-size:12px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+nav b{color:var(--mute)}nav .sp{flex:1}
+.box{background:var(--paper);border:1px solid var(--line);box-shadow:3px 3px 0 var(--shadow);margin-bottom:12px}
+.box h2{margin:0;background:linear-gradient(var(--head2),var(--head));color:#fff;font-size:13px;padding:4px 8px;border-bottom:1px solid var(--line)}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;background:var(--btn);font-size:12px;padding:4px 8px;border-bottom:1px solid var(--line)}
+td{padding:7px 8px;border-bottom:1px dotted var(--line);vertical-align:top}
+tr:hover td{background:var(--post)}
+.n{text-align:center;white-space:nowrap;color:var(--mute);font-size:12px}
+.d{color:var(--mute);font-size:12px}
+.t{font-weight:bold}
+.wrapx{overflow-x:auto}
+.post{background:var(--post);border:1px solid var(--line);margin:8px;padding:6px 8px;display:flex;gap:10px}
+.ph{font-size:12px;color:var(--mute);margin-bottom:4px}
+.ph .nm{color:var(--green);font-weight:bold}
+.ph .no{cursor:pointer}
+.body{white-space:pre-wrap;word-break:break-word}
+.gt{color:var(--green)}.q{color:var(--accent);text-decoration:underline}
+.op{border-left:4px solid var(--head2)}
+form{padding:8px;display:grid;gap:5px}
+input,textarea,button,select{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);padding:5px 6px}
+textarea{min-height:90px;resize:vertical;width:100%}
+button{background:var(--btn);border:2px outset var(--line);cursor:pointer;font-weight:bold}
+button:active{border-style:inset}
+.row{display:flex;gap:6px;flex-wrap:wrap}.row input{flex:1;min-width:120px}
+.msg{padding:14px;text-align:center;color:var(--mute)}
+.del{color:var(--accent);font-size:11px;margin-left:6px}
+.lv{background:var(--head2);color:#fff;font-size:10px;padding:0 4px;margin-left:4px}.tt{color:var(--accent);font-size:11px;font-weight:bold}.lock{opacity:.5}.bar{background:var(--btn);border:1px solid var(--line);height:14px;margin:6px 0}.bar div{background:var(--green);height:100%}.big{font-size:18px;font-weight:bold}.pf{display:flex;gap:14px;flex-wrap:wrap;padding:10px;align-items:flex-start}.av{width:112px;height:112px;object-fit:cover;border:2px outset var(--line);background:var(--btn);display:block;margin:0 auto 4px}.avs{width:64px;height:64px}.pc{width:84px;flex:none;text-align:center;font-size:12px}.pm{min-width:0;flex:1}.nm{font-weight:bold;word-break:break-all}.rx{margin-top:6px;font-size:11px}.rx a{display:inline-block;border:1px solid var(--line);background:var(--btn);padding:0 6px;margin-right:4px;color:var(--ink)}.rx a.on{background:var(--head2);color:#fff}.sg{color:var(--mute);font-size:11px;border-top:1px dashed var(--line);margin-top:6px;padding-top:3px}.pin{color:var(--accent);font-weight:bold;font-size:11px}.rx a.rpt{border:none;background:none;color:var(--mute);margin-left:8px;text-decoration:underline}.adm{background:#ffb400;color:#000;font-size:10px;font-weight:bold;padding:0 4px;letter-spacing:1px}.dev{text-shadow:0 0 6px #ff8a00}.toast{position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));background:#000;color:#4f4;padding:8px 12px;border:2px outset #555;font:12px "Courier New",monospace;z-index:9}
+footer{text-align:center;color:var(--mute);font-size:11px;margin:14px 0}
+</style>
+</head>
+<body>
+<div id="wrap">
+<header>
+  <div class="logo" onclick="location.hash='#/'">LOUBET FORUM<small>« Le forum du lycée — sans prise de tête »</small></div>
+  <div class="online"><i></i><span id="on">connectés : …</span></div>
+</header>
+<nav id="nav"></nav>
+<main id="app"><div class="msg">Chargement…</div></main>
+<footer>Loubet Forum © — Reste respectueux : pas de harcèlement, pas de données perso. Les modos veillent. ★</footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script>
+var BOARDS=[
+ ["regles","Règles & Annonces","Règlement et annonces officielles — lecture seule"],
+ ["sugg","Suggestions","Propose des idées pour améliorer le forum"],
+ ["gen","Général","Discussions libres, présentations, coups de gueule"],
+ ["cours","Cours & Bac","Entraide, révisions, Parcoursup, profs"],
+ ["sci","Sciences","Maths, physique, chimie, SVT, espace, expériences"],
+ ["philo","Philosophie","Débats d'idées, dissertations, grandes questions"],
+ ["sport","Sport","Foot, basket, musculation, e-sport, matchs du week-end"],
+ ["info","Informatique & Tech","Code, hardware, IA, bidouille, projets persos"],
+ ["hist","Histoire-Géo & Actu","Histoire, géopolitique, actualité, société"],
+ ["art","Arts & Lettres","Écriture, dessin, théâtre, photo, littérature"],
+ ["jv","Jeux vidéo","Consoles, PC, mobile… tout ce qui se manette"],
+ ["mus","Musique & Ciné","Rap, rock, séries, films, mangas"],
+ ["vie","Vie du lycée","Cantine, sorties, événements, BDE"],
+ ["hs","Hors-sujet","Tout le reste, mèmes et blagues"]
+];
+var $=function(s){return document.querySelector(s)},app=$("#app"),nav=$("#nav");
+var CFG=window.LOUBET_CONFIG||{},sb=null,authUser=null,lastUid,me=null,isMod=false;
+var members=[],threads=[],dms=[],reports=[],dmFor="",dailyFor="";
+var curTid=null,postsC=[],rxC=[],votesC=[];
+var DEVCOL="#ffb400";
+
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function fmt(ts){var d=new Date(ts);return d.toLocaleDateString("fr-FR")+" "+d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}
+function body(s){return esc(s).split("\n").map(function(l){
+ l=l.replace(/&gt;&gt;(\d+)/g,'<span class="q">&gt;&gt;$1</span>');
+ return /^&gt;(?!&gt;)/.test(l)?'<span class="gt">'+l+'</span>':l}).join("\n")}
+function pno(ts){return String(new Date(ts).getTime()).slice(-7)}
+function bname(id){var b=BOARDS.filter(function(x){return x[0]==id})[0];return b?b[1]:id}
+function levelOf(xp){return 1+Math.floor(Math.sqrt((xp||0)/15))}
+function xpFor(l){return 15*(l-1)*(l-1)}
+function bcn(m,b){return (m.bc&&m.bc[b])||0}
+function deb(fn,ms){var t;return function(){clearTimeout(t);t=setTimeout(fn,ms)}}
+function errm(e){return (e&&(e.message||e.code))||"erreur"}
+function toast(t){var d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(function(){d.remove()},4500)}
+function typing(){return Array.from(app.querySelectorAll("input,textarea")).some(function(x){return (x.value&&x.type!="color"&&x.type!="file")||x===document.activeElement})}
+function rnd(){return Array.from(crypto.getRandomValues(new Uint8Array(8))).map(function(x){return x.toString(16).padStart(2,"0")}).join("")}
+
+// ---- Titres (affichage ; la validation réelle est faite par le serveur) ----
+var TITLES=[
+ ["Nouveau","Bienvenue sur le forum",function(m){return true}],
+ ["Photogénique","Ajouter une photo de profil",function(m){return !!m.av}],
+ ["Fidèle","7 jours de connexion d'affilée",function(m){return (m.streak||0)>=7}],
+ ["Première pierre","Poster 1 message",function(m){return m.posts>=1}],
+ ["Initiateur","Créer 3 sujets",function(m){return m.threads>=3}],
+ ["Bavard","Poster 25 messages",function(m){return m.posts>=25}],
+ ["Habitué","Atteindre le niveau 5",function(m){return levelOf(m.xp)>=5}],
+ ["Cerveau","10 messages dans /sci/ ou /philo/",function(m){return bcn(m,"sci")+bcn(m,"philo")>=10}],
+ ["Sportif du Loubet","10 messages dans /sport/",function(m){return bcn(m,"sport")>=10}],
+ ["Gamer","10 messages dans /jv/",function(m){return bcn(m,"jv")>=10}],
+ ["Vétéran","Atteindre le niveau 10",function(m){return levelOf(m.xp)>=10}],
+ ["Légende du Loubet","Atteindre le niveau 20",function(m){return levelOf(m.xp)>=20}]
+];
+function unlocked(m){return TITLES.filter(function(t){return t[2](m)}).map(function(t){return t[0]})}
+
+// ---- Membres / rôles ----
+function memberOf(n){var l=String(n||"").toLowerCase();return members.filter(function(m){return String(m.pseudo).toLowerCase()==l})[0]}
+function isDev(n){var m=memberOf(n);return !!m&&m.role=="admin"}
+function ttl(m){if(m.role=="admin")return "Développeur";return (m.title&&m.title!="Développeur")?m.title:"Nouveau"}
+function mcolor(n){if(isDev(n))return DEVCOL;var m=memberOf(n);if(m&&String(m.col).toLowerCase()==DEVCOL)return "var(--green)";return m&&/^#[0-9a-fA-F]{6}$/.test(m.col||"")?m.col:"var(--green)"}
+function avImg(n,c){var m=memberOf(n);if(m&&m.av&&/^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(m.av))return '<img class="av '+(c||"")+'" src="'+m.av+'" alt="">';return '<div class="av '+(c||"")+'" style="display:flex;align-items:center;justify-content:center;font:bold 28px Verdana;color:var(--mute)">'+esc(String(n||"?").charAt(0).toUpperCase())+'</div>'}
+function sigOf(n){var m=memberOf(n);return m&&m.sig?'<div class="sg">'+esc(m.sig)+'</div>':''}
+function refreshMe(){me=authUser?(members.filter(function(m){return m.id==authUser.id})[0]||null):null;isMod=!!me&&me.role=="admin"}
+
+// ---- Chargement des données ----
+async function loadMembers(){var r=await sb.from("profiles").select("*").limit(1000);if(r.error){toast("Erreur membres : "+errm(r.error));return}members=r.data;refreshMe()}
+async function loadThreads(){var r=await sb.from("threads").select("*").order("last",{ascending:false}).limit(200);if(r.error){toast("Erreur sujets : "+errm(r.error));return}threads=r.data}
+async function loadDms(){if(!me){dms=[];return}var r=await sb.from("dms").select("*").order("ts",{ascending:false}).limit(300);if(!r.error)dms=r.data}
+async function loadReports(){if(!isMod){reports=[];return}var r=await sb.from("reports").select("*").order("ts",{ascending:false}).limit(200);if(!r.error)reports=r.data}
+async function loadPosts(id){
+ var a=await sb.from("posts").select("*").eq("thread_id",id).order("ts",{ascending:true}).limit(500);
+ var b=await sb.from("reactions").select("post_id,user_id,kind").eq("thread_id",id);
+ var c=await sb.from("poll_votes").select("user_id,opt").eq("thread_id",id);
+ if(curTid!=id)return;
+ if(a.error){var bx=$("#ps");if(bx)bx.innerHTML='<div class="msg">Lecture impossible.</div>';return}
+ postsC=a.data;rxC=b.data||[];votesC=c.data||[];renderPosts(id);renderPoll(id)}
+
+// ---- Authentification (Supabase Auth, sans compte Claude) ----
+function gate(){return '<div class="box"><h2>Compte Loubet Forum</h2><form id="gf"><div class="d">Connecte-toi avec ton e-mail, ou crée un compte. Pseudo : 3 à 16 caractères (lettres, chiffres, - ou _), demandé à l’inscription. Mot de passe : 6 caractères minimum. Ton e-mail reste privé (jamais affiché).</div><div class="row"><input id="gm" type="email" autocomplete="email" maxlength="120" placeholder="E-mail" required><input id="gw" type="password" autocomplete="current-password" maxlength="64" placeholder="Mot de passe" required></div><div class="row"><input id="gp" maxlength="16" autocomplete="username" placeholder="Pseudo (inscription uniquement)"></div><div class="row"><button type="button" id="gl">Se connecter</button><button type="button" id="gc">Créer mon compte</button><button type="button" id="gf2">Mot de passe oublié</button></div><div class="d" id="gerr"></div></form></div>'}
+function bindGate(){var f=$("#gf");if(!f)return;f.onsubmit=function(e){e.preventDefault()};var err=$("#gerr");
+ $("#gl").onclick=async function(){var em=$("#gm").value.trim(),w=$("#gw").value;if(!em||!w){err.textContent="E-mail et mot de passe requis.";return}
+  var r=await sb.auth.signInWithPassword({email:em,password:w});
+  if(r.error)err.textContent=/invalid/i.test(r.error.message)?"E-mail ou mot de passe incorrect.":r.error.message};
+ $("#gc").onclick=async function(){var p=$("#gp").value.trim(),em=$("#gm").value.trim(),w=$("#gw").value;
+  if(!/^[A-Za-z0-9_-]{3,16}$/.test(p)){err.textContent="Pseudo invalide (3 à 16 caractères : lettres, chiffres, - ou _).";return}
+  if(!em){err.textContent="E-mail requis.";return}
+  if(w.length<6){err.textContent="Mot de passe trop court (6 minimum).";return}
+  if(memberOf(p)){err.textContent="Ce pseudo est déjà pris.";return}
+  var r=await sb.auth.signUp({email:em,password:w,options:{data:{pseudo:p}}});
+  if(r.error){err.textContent=/database error/i.test(r.error.message)?"Pseudo indisponible ou réservé.":r.error.message;return}
+  if(!r.data.session)err.textContent="Compte créé ! Vérifie ta boîte mail pour confirmer, puis connecte-toi."};
+ $("#gf2").onclick=async function(){var em=$("#gm").value.trim();if(!em){err.textContent="Saisis ton e-mail d’abord.";return}
+  var r=await sb.auth.resetPasswordForEmail(em,{redirectTo:location.href.split("#")[0]});
+  err.textContent=r.error?r.error.message:"Si ce compte existe, un e-mail de réinitialisation vient d’être envoyé."}}
+async function recover(){var np=prompt("Nouveau mot de passe (6 caractères minimum) :");if(!np)return;
+ if(np.length<6){toast("Mot de passe trop court");return}
+ var r=await sb.auth.updateUser({password:np});toast(r.error?"Échec : "+errm(r.error):"Mot de passe modifié")}
+async function onAuth(){await loadMembers();await loadDms();await loadReports();daily();route()}
+async function daily(){if(!me||dailyFor==me.id)return;dailyFor=me.id;
+ var r=await sb.rpc("claim_daily");if(r.error||!r.data||!r.data.length)return;var g=r.data[0];
+ toast("Bonus quotidien : +"+g.gain+" XP (série de "+g.streak+" jour"+(g.streak>1?"s":"")+")");await loadMembers();softRoute()}
+function softRoute(){var h=location.hash;if((h==""||h=="#"||h=="#/"||h=="#/top"||h=="#/admin"||h=="#/me")&&!typing())route()}
+async function afterPost(){var old=me?Object.assign({},me):null;await loadMembers();if(!old||!me)return;
+ if(levelOf(me.xp)>levelOf(old.xp))toast("Niveau "+levelOf(me.xp)+" !");
+ var b=unlocked(old);unlocked(me).forEach(function(n){if(b.indexOf(n)<0)toast("Titre débloqué : "+n)})}
+
+// ---- Navigation ----
+function route(){
+ var h=location.hash.replace(/^#\/?/,"").split("/");
+ curTid=null;
+ if(h[0]=="b"&&h[1])return boardView(h[1]);
+ if(h[0]=="t"&&h[1])return threadView(h[1]);
+ if(h[0]=="me")return profile();
+ if(h[0]=="u"&&h[1])return userView(decodeURIComponent(h[1]));
+ if(h[0]=="mp")return mpView(h[1]?decodeURIComponent(h[1]):"");
+ if(h[0]=="mod")return modView();
+ if(h[0]=="admin")return adminView();
+ if(h[0]=="top")return topView();
+ home();
+}
+function unreadN(){return me?dms.filter(function(d){return d.to_id==me.id&&!d.read}).length:0}
+function unreadTxt(){var n=unreadN();return n?" ("+n+")":""}
+function navbar(parts){nav.innerHTML='<b>▸</b> <a href="#/">Accueil</a>'+parts+'<span class="sp"></span>'+(me?'<a href="#/me">'+esc(me.pseudo)+' · Niv.'+levelOf(me.xp)+'</a><a href="#/mp" id="mpl">Messages'+unreadTxt()+'</a><a id="lo">Déconnexion</a>':'<a href="#/me">Connexion / Inscription</a>')+(isMod?'<a href="#/mod">Modération'+(reports.length?' ('+reports.length+')':'')+'</a><a href="#/admin">Administration</a>':'')+'<a href="#/top">Classement</a><a id="th">Thème</a>';
+ var lo=$("#lo");if(lo)lo.onclick=async function(){await sb.auth.signOut();authUser=null;lastUid=null;dailyFor="";dmFor="";refreshMe();dms=[];reports=[];route()};
+ $("#th").onclick=function(){var r=document.documentElement,dk=getComputedStyle(r).getPropertyValue("--bg").trim()=="#10142a";r.setAttribute("data-theme",dk?"light":"dark")}}
+
+function profile(){
+ navbar(" › Profil");
+ if(!me){app.innerHTML=gate();bindGate();return}
+ var l=levelOf(me.xp),a=xpFor(l),b=xpFor(l+1),pc=Math.round((me.xp-a)/(b-a)*100),un=unlocked(me);
+ var tl=TITLES.map(function(t){var ok=un.indexOf(t[0])>-1;return '<tr><td class="'+(ok?'':'lock')+'">'+(ok?'[OK]':'[--]')+' <b>'+esc(t[0])+'</b><div class="d">'+esc(t[1])+'</div></td><td class="n">'+(ok?(me.title==t[0]?'équipé':'<a data-eq="'+esc(t[0])+'">équiper</a>'):'')+'</td></tr>'}).join("");
+ app.innerHTML='<div class="box"><h2>Mon profil</h2><div class="pf"><div class="pc" style="width:auto">'+avImg(me.pseudo)+'<div class="big" style="color:'+mcolor(me.pseudo)+'">'+esc(me.pseudo)+'</div>'+(me.role=="admin"?'<span class="adm">ADMIN</span>':'')+'</div><div style="flex:1;min-width:200px"><div class="big">Niveau '+l+' <span class="tt">['+esc(ttl(me))+']</span></div><div class="bar"><div style="width:'+pc+'%"></div></div><div class="d">'+me.xp+' XP — prochain niveau à '+b+' XP · '+me.posts+' messages · '+me.threads+' sujets</div>'+(me.bio?'<div class="body" style="margin-top:6px">'+esc(me.bio)+'</div>':'')+'</div></div></div>'+editForm()+'<div class="box"><h2>Titres</h2><table>'+tl+'</table></div>';
+ bindEdit();app.querySelectorAll("[data-eq]").forEach(function(a){a.onclick=async function(){
+  var r=await sb.from("profiles").update({title:a.dataset.eq}).eq("id",me.id);
+  if(r.error){toast("Titre indisponible : "+errm(r.error));return}me.title=a.dataset.eq;route()}});
+}
+function topView(){
+ navbar(" › Classement");
+ var r=members.slice().sort(function(a,b){return (b.xp||0)-(a.xp||0)}).slice(0,20).map(function(m,i){return '<tr><td class="n">'+(i+1)+'</td><td><a href="#/u/'+encodeURIComponent(m.pseudo)+'"><b>'+esc(m.pseudo)+'</b></a> <span class="tt">['+esc(ttl(m))+']</span></td><td class="n">Niv.'+levelOf(m.xp)+'</td><td class="n">'+(Number(m.xp)||0)+' XP</td></tr>'}).join("");
+ app.innerHTML='<div class="box"><h2>Classement</h2><table>'+(r||'<tr><td class="msg">Aucun membre pour l’instant.</td></tr>')+'</table></div>';
+}
+
+function home(){
+ navbar("");
+ var rows=BOARDS.map(function(b){
+  var ts=threads.filter(function(t){return t.board==b[0]}),n=ts.length,m=ts.reduce(function(a,t){return a+(t.count||0)},0),last=ts[0];
+  return '<tr><td><a class="t" href="#/b/'+b[0]+'">/'+b[0]+'/ — '+esc(b[1])+'</a><div class="d">'+esc(b[2])+'</div></td><td class="n">'+n+'</td><td class="n">'+m+'</td><td class="d">'+(last?fmt(last.last):"—")+'</td></tr>'}).join("");
+ var recent=threads.slice().sort(function(x,y){return (y.pin?1:0)-(x.pin?1:0)}).slice(0,8).map(function(t){return '<tr><td>'+(t.pin?'<span class="pin">[ÉPINGLÉ]</span> ':'')+'<a href="#/t/'+t.id+'">'+esc(t.title)+'</a> <span class="d">/'+esc(t.board)+'/</span></td><td class="n">'+(t.count||0)+'</td><td class="d">'+fmt(t.last)+'</td></tr>'}).join("");
+ app.innerHTML='<div class="d" style="margin:0 2px 8px">Membres : '+members.length+' · Sujets : '+threads.length+'</div><div class="box"><h2>Les forums</h2><div class="wrapx"><table><tr><th>Forum</th><th class="n">Sujets</th><th class="n">Réponses</th><th>Dernier message</th></tr>'+rows+'</table></div></div>'
+ +'<div class="box"><h2>Derniers sujets actifs</h2><div class="wrapx"><table><tr><th>Sujet</th><th class="n">Rép.</th><th>Date</th></tr>'+(recent||'<tr><td colspan="3" class="msg">Aucun sujet pour l’instant. Lance le premier !</td></tr>')+'</table></div></div>'+(!me?gate():"");bindGate();
+}
+
+function boardView(b){
+ navbar(' › <a href="#/b/'+esc(b)+'">/'+esc(b)+'/</a>');
+ var ts=threads.filter(function(t){return t.board==b}).sort(function(x,y){return (y.pin?1:0)-(x.pin?1:0)});
+ var rows=ts.map(function(t){return '<tr><td>'+(t.pin?'<span class="pin">[ÉPINGLÉ]</span> ':'')+'<a class="t" href="#/t/'+t.id+'">'+esc(t.title)+'</a>'+(isMod?' <a class="del" data-pin="'+t.id+'">['+(t.pin?'désépingler':'épingler')+']</a> <a class="del" data-del="'+t.id+'">[suppr]</a>':'')+'</td><td class="d">'+esc(t.author)+'</td><td class="n">'+(t.count||0)+'</td><td class="d">'+fmt(t.last)+'</td></tr>'}).join("");
+ app.innerHTML='<div class="box"><h2>/'+esc(b)+'/ — '+esc(bname(b))+'</h2><div class="wrapx"><table><tr><th>Sujet</th><th>Auteur</th><th class="n">Rép.</th><th>Dernier msg</th></tr>'+(rows||'<tr><td colspan="4" class="msg">Rien ici… sois le premier à poster.</td></tr>')+'</table></div></div>'
+ +(me?(b=="regles"&&!isMod?'<div class="box"><div class="msg">Seule l’administration peut publier ici.</div></div>':'<div class="box"><h2>Nouveau sujet</h2><form id="nf"><div class="row"><input id="ti" maxlength="90" placeholder="Titre du sujet" required></div><textarea id="bo" maxlength="3000" placeholder="Ton message…" required></textarea><textarea id="po" maxlength="300" placeholder="Sondage (facultatif) : une option par ligne, 2 à 6 options" style="min-height:50px"></textarea><button>Poster le sujet (+10 XP)</button></form></div>'):gate());
+ var f=$("#nf");if(f)f.onsubmit=function(e){e.preventDefault();newThread(b)};bindGate();
+ app.querySelectorAll("[data-pin]").forEach(function(a){a.onclick=async function(){var t=threads.filter(function(x){return x.id==a.dataset.pin})[0];
+  var r=await sb.from("threads").update({pin:!(t&&t.pin)}).eq("id",a.dataset.pin);if(r.error)toast("Échec : "+errm(r.error));else{await loadThreads();route()}}});
+ app.querySelectorAll("[data-del]").forEach(function(a){a.onclick=function(){ask(a,function(){delThread(a.dataset.del)})}});
+}
+function pollOf(){var el=$("#po"),l=(el?el.value:"").split("\n").map(function(s){return s.trim().slice(0,40)}).filter(Boolean).slice(0,6);return l.length>=2?l:null}
+function fx(txt){return txt.replace(/!roll\s*(\d{1,2})d(\d{1,3})/gi,function(m,n,s){n=+n;s=Math.max(2,+s);var r=[],tot=0;for(var i=0;i<n;i++){var v=1+Math.floor(Math.random()*s);r.push(v);tot+=v}return "[roll "+n+"d"+s+" = "+tot+(n>1?" ("+r.join("+")+")":"")+"]"}).replace(/!flip/gi,function(){return "[pile ou face : "+(Math.random()<.5?"PILE":"FACE")+"]"})}
+
+async function newThread(b){
+ if(!me||me.ban){toast("Compte suspendu");return}
+ var ti=$("#ti").value.trim(),bo=fx($("#bo").value.trim());if(!ti||!bo)return;
+ var r=await sb.rpc("create_thread",{p_board:b,p_title:ti,p_body:bo,p_po:pollOf()});
+ if(r.error){toast("Impossible de poster : "+errm(r.error));return}
+ await loadThreads();afterPost();location.hash="#/t/"+r.data;
+}
+async function delThread(id){
+ var r=await sb.from("threads").delete().eq("id",id);
+ if(r.error){toast("Échec : "+errm(r.error));return}
+ toast("Sujet supprimé");await loadThreads();route();
+}
+function ask(a,fn){if(a.dataset.c){fn();return}a.dataset.c="1";var t=a.textContent;a.textContent="[confirmer ?]";setTimeout(function(){if(a.isConnected){a.textContent=t;delete a.dataset.c}},4000)}
+
+// ---- Sujet ----
+var RX=[["plus","+1"],["lol","LOL"],["brain","Cerveau"],["gg","GG"]];
+function rxHtml(pid){return '<div class="rx">'+RX.map(function(x){var a=rxC.filter(function(r){return r.post_id==pid&&r.kind==x[0]});var on=me&&a.some(function(r){return r.user_id==me.id});return '<a data-rx="'+x[0]+'" data-pid="'+esc(pid)+'" class="'+(on?'on':'')+'">'+x[1]+(a.length?' '+a.length:'')+'</a>'}).join("")+(me?'<a class="rpt" data-rp="'+esc(pid)+'">Signaler</a>':'')+'</div>'}
+async function react(tid,pid,k){if(!me){toast("Connecte-toi pour réagir");return}
+ var has=rxC.some(function(r){return r.post_id==pid&&r.kind==k&&r.user_id==me.id});
+ var r=has?await sb.from("reactions").delete().match({post_id:pid,kind:k,user_id:me.id}):await sb.from("reactions").insert({post_id:pid,kind:k});
+ if(r.error)toast("Réaction impossible : "+errm(r.error));loadPosts(tid)}
+async function report(tid,pid){if(!me)return;var r=await sb.rpc("report_post",{p_post:pid});toast(r.error?"Échec du signalement":"Signalement envoyé aux modérateurs")}
+
+function threadView(id){
+ var t=threads.filter(function(x){return x.id==id})[0];curTid=id;postsC=[];rxC=[];votesC=[];
+ navbar(t?' › <a href="#/b/'+esc(t.board)+'">/'+esc(t.board)+'/</a> › '+esc(t.title):' › sujet');
+ app.innerHTML='<div class="box"><h2>'+(t?esc(t.title):"Sujet")+'</h2>'+(isMod&&t?'<div class="rx" style="padding:4px 8px"><a id="pn">'+(t.pin?'Désépingler':'Épingler')+' ce sujet</a></div>':'')+'<div id="poll"></div><div id="ps"><div class="msg">Chargement…</div></div></div>'
+ +(me?(t&&t.board=="regles"&&!isMod?'<div class="box"><div class="msg">Ce sujet est en lecture seule.</div></div>':'<div class="box"><h2>Répondre</h2><form id="rf"><textarea id="bo" maxlength="3000" placeholder="Ta réponse… (>>1234567 pour citer, > pour greentext)" required></textarea><button>Répondre (+3 XP)</button></form></div>'):gate());
+ bindGate();loadPosts(id);
+ var pn=$("#pn");if(pn)pn.onclick=async function(){var r=await sb.from("threads").update({pin:!t.pin}).eq("id",id);if(r.error)toast("Échec : "+errm(r.error));else{await loadThreads();route()}};
+ if($("#rf"))$("#rf").onsubmit=async function(e){e.preventDefault();
+  if(me.ban){toast("Compte suspendu");return}var bo=fx($("#bo").value.trim());if(!bo)return;
+  var r=await sb.from("posts").insert({thread_id:id,body:bo});
+  if(r.error){toast("Impossible de poster : "+errm(r.error));return}
+  $("#bo").value="";await loadPosts(id);afterPost()};
+}
+function renderPosts(id){
+ var box=$("#ps");if(!box)return;
+ if(!postsC.length){box.innerHTML='<div class="msg">Ce sujet n’existe pas (ou plus).</div>';return}
+ box.innerHTML=postsC.map(function(p){
+  return '<div class="post'+(p.op?' op':'')+'"><div class="pc">'+avImg(p.author,"avs")+'<a class="nm'+(isDev(p.author)?' dev':'')+'" href="#/u/'+encodeURIComponent(p.author)+'" style="color:'+mcolor(p.author)+'">'+esc(p.author)+'</a>'+(isDev(p.author)?'<div><span class="adm">ADMIN</span></div>':'')+(p.lv?'<div><span class="lv">Niv.'+Number(p.lv)+'</span></div>':'')+((isDev(p.author)||(p.tt&&p.tt!="Développeur"))?'<div class="tt">['+esc(isDev(p.author)?"Développeur":p.tt)+']</div>':'')+'</div><div class="pm"><div class="ph">'+fmt(p.ts)+' <a class="no" data-q="'+pno(p.ts)+'">No.'+pno(p.ts)+'</a>'+(isMod?' <a class="del" data-dp="'+esc(p.id)+'">[suppr]</a>':'')+'</div><div class="body">'+body(p.body)+'</div>'+sigOf(p.author)+rxHtml(p.id)+'</div></div>'}).join("");
+ box.querySelectorAll("[data-q]").forEach(function(a){a.onclick=function(){var b=$("#bo");if(!b)return;b.value+=">>"+a.dataset.q+"\n";b.focus()}});
+ box.querySelectorAll("[data-rx]").forEach(function(a){a.onclick=function(){react(id,a.dataset.pid,a.dataset.rx)}});
+ box.querySelectorAll("[data-rp]").forEach(function(a){a.onclick=function(){report(id,a.dataset.rp)}});
+ box.querySelectorAll("[data-dp]").forEach(function(a){a.onclick=function(){ask(a,async function(){var r=await sb.from("posts").delete().eq("id",a.dataset.dp);if(r.error)toast("Échec : "+errm(r.error));else{toast("Message supprimé");loadPosts(id)}})}});
+}
+function renderPoll(id){var el=$("#poll"),t=threads.filter(function(x){return x.id==id})[0];
+ if(!el)return;if(!t||!Array.isArray(t.po)||!t.po.length){el.innerHTML="";return}
+ var cnt=t.po.map(function(){return 0}),mine=-1,tot=0;
+ votesC.forEach(function(v){if(cnt[v.opt]!==undefined){cnt[v.opt]++;tot++;if(me&&v.user_id==me.id)mine=v.opt}});
+ el.innerHTML='<div style="padding:8px 10px;border-bottom:1px dotted var(--line)"><b>Sondage</b> <span class="d">('+tot+' vote'+(tot>1?'s':'')+')</span>'+t.po.map(function(o,i){var pc=tot?Math.round(cnt[i]/tot*100):0;return '<div style="margin:5px 0"><a data-v="'+i+'"'+(i==mine?' style="font-weight:bold"':'')+'>'+(i==mine?'[X] ':'[ ] ')+esc(o)+'</a> <span class="d">'+cnt[i]+' ('+pc+'%)</span><div class="bar" style="margin:2px 0"><div style="width:'+pc+'%"></div></div></div>'}).join("")+(me?'':'<div class="d">Connecte-toi pour voter.</div>')+'</div>';
+ el.querySelectorAll("[data-v]").forEach(function(a){a.onclick=async function(){if(!me)return;var o=+a.dataset.v;
+  var r=mine>-1?await sb.from("poll_votes").update({opt:o}).eq("thread_id",id).eq("user_id",me.id):await sb.from("poll_votes").insert({thread_id:id,opt:o});
+  if(r.error)toast("Vote impossible");loadPosts(id)}})}
+
+// ---- Profil : personnalisation ----
+function pickAvatar(file,cb){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var s=128,c=document.createElement("canvas");c.width=c.height=s;var x=c.getContext("2d"),m=Math.min(im.width,im.height);x.drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,s,s);cb(c.toDataURL("image/jpeg",.72))};im.onerror=function(){toast("Image illisible")};im.src=r.result};r.readAsDataURL(file)}
+function editForm(){return '<div class="box"><h2>Personnaliser mon profil</h2><form id="ef"><div class="d">Photo de profil (recadrée en carré) et couleur de ton pseudo :</div><div class="row"><input type="file" id="ep" accept="image/*"><input type="color" id="ec" value="'+(/^#[0-9a-fA-F]{6}$/.test(me.col||"")?me.col:"#789922")+'" style="flex:none;width:50px;padding:0"></div><textarea id="eb" maxlength="140" placeholder="Bio (140 caractères)" style="min-height:50px">'+esc(me.bio||"")+'</textarea><input id="es" maxlength="80" placeholder="Signature sous tes messages" value="'+esc(me.sig||"")+'"><button>Enregistrer</button></form></div>'}
+function bindEdit(){var f=$("#ef");if(!f)return;var av=null;
+ $("#ep").onchange=function(){var fl=this.files[0];if(fl)pickAvatar(fl,function(u){av=u;toast("Photo prête : clique sur Enregistrer")})};
+ f.onsubmit=async function(e){e.preventDefault();var c=$("#ec").value;if(me.role!="admin"&&c.toLowerCase()==DEVCOL)c="#789922";
+  var d={col:c,bio:$("#eb").value.trim().slice(0,140),sig:$("#es").value.trim().slice(0,80)};if(av)d.av=av;
+  var r=await sb.from("profiles").update(d).eq("id",me.id);
+  if(r.error){toast("Échec de l'enregistrement");return}Object.assign(me,d);toast("Profil enregistré");route()}}
+function userView(n){navbar(" › "+esc(n));var m=memberOf(n);if(!m){app.innerHTML='<div class="msg">Membre introuvable.</div>';return}
+ app.innerHTML='<div class="box"><h2>Profil de '+esc(m.pseudo)+'</h2><div class="pf"><div class="pc" style="width:auto">'+avImg(m.pseudo)+'<div class="big" style="color:'+mcolor(m.pseudo)+'">'+esc(m.pseudo)+'</div>'+(m.role=="admin"?'<span class="adm">ADMIN</span>':'')+'</div><div style="flex:1;min-width:200px"><div class="big">Niveau '+levelOf(m.xp)+' <span class="tt">['+esc(ttl(m))+']</span></div><div class="d">'+(Number(m.xp)||0)+' XP · '+(Number(m.posts)||0)+' messages · '+(Number(m.threads)||0)+' sujets · série : '+(Number(m.streak)||0)+' j · inscrit le '+new Date(m.created_at).toLocaleDateString("fr-FR")+'</div>'+(m.bio?'<div class="body" style="margin-top:6px">'+esc(m.bio)+'</div>':'')+(me&&me.id!=m.id?'<div class="rx"><a href="#/mp/'+encodeURIComponent(m.pseudo)+'">Envoyer un message privé</a></div>':'')+'</div></div></div>'}
+
+// ---- Messages privés (RLS : seuls expéditeur et destinataire lisent) ----
+function mpView(to){navbar(" › Messages");if(!me){app.innerHTML=gate();bindGate();return}
+ var rec=dms.filter(function(d){return d.to_id==me.id}),sent=dms.filter(function(d){return d.from_id==me.id});
+ function row(d,r){return '<div class="post"><div class="pm"><div class="ph">'+(r?'De <a href="#/mp/'+encodeURIComponent(d.from_p)+'">'+esc(d.from_p)+'</a>':'À <a href="#/u/'+encodeURIComponent(d.to_p)+'">'+esc(d.to_p)+'</a>')+' · '+fmt(d.ts)+(r&&!d.read?' <span class="pin">[NOUVEAU]</span>':'')+'</div><div class="body">'+esc(d.body)+'</div></div></div>'}
+ app.innerHTML='<div class="box"><h2>Nouveau message privé</h2><form id="mf"><input id="mt" maxlength="16" placeholder="Pseudo du destinataire" value="'+esc(to)+'" required><textarea id="mb" maxlength="500" placeholder="Ton message (500 caractères max)" required></textarea><button>Envoyer</button><div class="d">Seuls toi et le destinataire pouvez lire ces messages dans le forum. Ils ne sont toutefois pas chiffrés de bout en bout : l’hébergeur de la base de données y a techniquement accès. N’y mets rien de sensible.</div></form></div><div class="box"><h2>Reçus ('+rec.length+')</h2>'+(rec.map(function(d){return row(d,1)}).join("")||'<div class="msg">Aucun message reçu.</div>')+'</div><div class="box"><h2>Envoyés ('+sent.length+')</h2>'+(sent.map(function(d){return row(d,0)}).join("")||'<div class="msg">Aucun message envoyé.</div>')+'</div>';
+ var un=rec.filter(function(d){return !d.read}).map(function(d){return d.id});
+ if(un.length)sb.from("dms").update({read:true}).in("id",un).then(function(){});
+ $("#mf").onsubmit=async function(e){e.preventDefault();var m=memberOf($("#mt").value.trim()),b=$("#mb").value.trim();if(!m||m.id==me.id){toast("Destinataire introuvable");return}if(!b)return;
+  var r=await sb.from("dms").insert({to_id:m.id,body:b});
+  if(r.error){toast("Échec de l'envoi : "+errm(r.error));return}
+  toast("Message envoyé");$("#mb").value="";$("#mt").value="";await loadDms();route()}}
+
+// ---- Modération / administration (droits vérifiés par RLS et RPC côté serveur) ----
+function modView(){navbar(" › Modération");if(!isMod){app.innerHTML='<div class="msg">Accès réservé aux modérateurs.</div>';return}
+ app.innerHTML='<div class="box"><h2>Signalements ('+reports.length+')</h2>'+(reports.map(function(r){return '<div class="post"><div class="pm"><div class="ph">Signalé par <b>'+esc(r.by)+'</b> · '+fmt(r.ts)+' · sujet : <a href="#/t/'+esc(r.thread_id)+'">'+esc(r.title||r.thread_id)+'</a></div><div class="body"><b>'+esc(r.author)+'</b> : '+esc(r.snip)+'</div><div class="rx"><a data-ig="'+esc(r.id)+'">Ignorer</a><a data-rm="'+esc(r.id)+'">Supprimer le message</a></div></div></div>'}).join("")||'<div class="msg">Aucun signalement.</div>')+'</div>';
+ app.querySelectorAll("[data-ig]").forEach(function(a){a.onclick=async function(){await sb.from("reports").delete().eq("id",a.dataset.ig);await loadReports();route()}});
+ app.querySelectorAll("[data-rm]").forEach(function(a){a.onclick=async function(){var r=reports.filter(function(x){return x.id==a.dataset.rm})[0];if(!r)return;
+  var e=await sb.from("posts").delete().eq("id",r.post_id);if(e.error)toast("Échec");await loadReports();route()}})}
+function adminView(){navbar(" › Administration");if(!isMod){app.innerHTML='<div class="msg">Accès réservé à l’administration.</div>';return}
+ var r=members.slice().sort(function(a,b){return (b.xp||0)-(a.xp||0)}).map(function(m){return '<tr><td><a href="#/u/'+encodeURIComponent(m.pseudo)+'"><b>'+esc(m.pseudo)+'</b></a>'+(m.ban?' <span class="pin">[SUSPENDU]</span>':'')+'</td><td class="n">Niv.'+levelOf(m.xp)+' · '+(Number(m.xp)||0)+' XP</td><td class="n">'+(m.role=="admin"?'<span class="adm">ADMIN</span>':'<a data-ban="'+esc(m.id)+'">'+(m.ban?'Réactiver':'Suspendre')+'</a> · <a data-z="'+esc(m.id)+'">XP à zéro</a> · <a data-dl="'+esc(m.id)+'">Supprimer</a>')+'</td></tr>'}).join("");
+ app.innerHTML='<div class="box"><h2>Administration — membres ('+members.length+')</h2><div class="wrapx"><table><tr><th>Membre</th><th class="n">Niveau</th><th class="n">Actions</th></tr>'+(r||'<tr><td colspan="3" class="msg">Aucun membre.</td></tr>')+'</table></div></div><div class="d" style="margin:0 2px">Les sujets peuvent être épinglés ou supprimés depuis chaque forum. Les signalements sont dans Modération.</div>';
+ async function act(fn,args){var x=await sb.rpc(fn,args);if(x.error)toast("Échec : "+errm(x.error));await loadMembers();route()}
+ app.querySelectorAll("[data-ban]").forEach(function(a){a.onclick=function(){var m=members.filter(function(x){return x.id==a.dataset.ban})[0];if(m)act("admin_set_ban",{target:m.id,v:!m.ban})}});
+ app.querySelectorAll("[data-z]").forEach(function(a){a.onclick=function(){if(a.dataset.c)act("admin_reset_xp",{target:a.dataset.z});else{a.dataset.c=1;a.textContent="Confirmer ?"}}});
+ app.querySelectorAll("[data-dl]").forEach(function(a){a.onclick=function(){if(a.dataset.c)act("admin_delete_member",{target:a.dataset.dl});else{a.dataset.c=1;a.textContent="Confirmer ?"}}})}
+
+window.addEventListener("hashchange",route);
+
+// ---- Démarrage ----
+(async function(){
+ if(!window.supabase||!CFG.url||!CFG.anonKey||/VOTRE/.test(CFG.url+CFG.anonKey)){
+  app.innerHTML='<div class="msg">⚠ Configuration manquante : renseigne l’URL et la clé « anon » de ton projet Supabase dans <b>config.js</b>.</div>';nav.innerHTML="";$("#on").textContent="hors ligne";return}
+ sb=window.supabase.createClient(CFG.url,CFG.anonKey);
+ await Promise.all([loadMembers(),loadThreads()]);
+ route();
+ // Temps réel : on recharge les données concernées (les droits de lecture sont appliqués par RLS)
+ var rM=deb(async function(){await loadMembers();softRoute()},900);
+ var rT=deb(async function(){await loadThreads();if(location.hash.indexOf("#/t/")==0)renderPoll(location.hash.slice(4));else if(!typing())route()},400);
+ var rP=deb(function(){if(curTid)loadPosts(curTid)},300);
+ var rD=deb(async function(){await loadDms();var a=$("#mpl");if(a)a.textContent="Messages"+unreadTxt();if(location.hash.indexOf("#/mp")==0&&!typing())route()},400);
+ var rR=deb(async function(){await loadReports();if(location.hash=="#/mod"&&!typing())route()},400);
+ var ch=sb.channel("lf-db"),H={profiles:rM,threads:rT,posts:rP,reactions:rP,poll_votes:rP,dms:rD,reports:rR};
+ Object.keys(H).forEach(function(t){ch.on("postgres_changes",{event:"*",schema:"public",table:t},H[t])});
+ ch.subscribe();
+ sb.auth.onAuthStateChange(function(ev,s){
+  if(ev=="PASSWORD_RECOVERY")setTimeout(recover,0);
+  var u=(s&&s.user)||null,nid=u?u.id:null;if(nid===lastUid)return;
+  lastUid=nid;authUser=u;setTimeout(onAuth,0)});
+ // Présence : nombre de connectés
+ var pc=sb.channel("lf-online",{config:{presence:{key:rnd()}}});
+ pc.on("presence",{event:"sync"},function(){$("#on").textContent="connectés : "+Math.max(Object.keys(pc.presenceState()).length,1)})
+   .subscribe(function(st){if(st==="SUBSCRIBED")pc.track({t:Date.now()})});
+})();
+</script>
+</body>
+</html>
